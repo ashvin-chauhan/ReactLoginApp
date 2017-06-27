@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
 import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -20,8 +21,7 @@ class WelcomeScreen extends Component {
     this.state = {
       isLoggedIn: isLoggedIn(),
       currentUser: currentUser(),
-      loginPage: [],
-      welcomeScreen: []
+      redirectToReferrer: false
     }   
   }
 
@@ -38,14 +38,19 @@ class WelcomeScreen extends Component {
       if (response.status == 200){
         console.log('Logout successfull')
         localStorage.clear();
-        var loginPage = [];
-        loginPage.push(<Login appContext={self.props.appContext}/>);
-        self.props.appContext.setState({loginPage: loginPage, welcomeScreen: []});
+        self.setState({ redirectToReferrer: true })
       }
     })
   }
 
   render() {
+    const { redirectToReferrer } = this.state
+    if (redirectToReferrer) {
+      return (
+        <Redirect to="/login"/>
+      )
+    }
+
     const Logged = (props) => (
       <IconMenu
         {...props}

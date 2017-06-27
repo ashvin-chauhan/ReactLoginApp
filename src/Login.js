@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -10,10 +11,11 @@ import WelcomeScreen from './WelcomeScreen'
 class Login extends Component {
   constructor(props){
     super(props);
-    this.state={
+    this.state = {
       email:'',
       password:'',
-      error: ''
+      error: '',
+      redirectToReferrer: false
     }
   }
 
@@ -21,10 +23,10 @@ class Login extends Component {
     var apiBaseUrl = "http://localhost:4000/";
     var self = this;
     var payload={
-      "email": this.state.email,
-      // "email": "client1@gmail.com",
-      "password": this.state.password,
-      // "password": "Hello@123",
+      // "email": this.state.email,
+      "email": "client1@gmail.com",
+      // "password": this.state.password,
+      "password": "Hello@123",
       "user_id": 2,
       "grant_type": "password"
     }
@@ -36,9 +38,7 @@ class Login extends Component {
         console.log("Login successfull");
         localStorage.setItem( 'AUTH_TOKEN', response.data.token.access_token );
         localStorage.setItem( 'CURRENT_USER', JSON.stringify(response.data.user) );
-        var welcomeScreen=[];
-        welcomeScreen.push(<WelcomeScreen appContext={self.props.appContext}/>)
-        self.props.appContext.setState({loginPage:[],welcomeScreen:welcomeScreen})
+        self.setState({ redirectToReferrer: true })
       }
       else{
         console.log("Invalid email and password");
@@ -52,6 +52,12 @@ class Login extends Component {
   }
 
   render() {
+    const { redirectToReferrer } = this.state
+    if (redirectToReferrer) {
+      return (
+        <Redirect to="/welcome"/>
+      )
+    }
     return (
       <div>
         <MuiThemeProvider>

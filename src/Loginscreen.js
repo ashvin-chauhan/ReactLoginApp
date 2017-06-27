@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Login from './Login';
 import Register from './Register';
+// import routes from './routes'
 class Loginscreen extends Component {
   constructor(props){
     super(props);
@@ -56,9 +57,14 @@ class Loginscreen extends Component {
         <div>
           {this.state.loginmessage}
           <MuiThemeProvider>
-            <div>
-               <RaisedButton label={this.state.buttonLabel} primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-            </div>
+            <Router>
+              <div>
+                <Link to="/registration">
+                  <RaisedButton label={this.state.buttonLabel} primary={true} style={style}/>
+                  {/*<Route path="/registration" component={Register} />*/}
+                </Link>
+              </div>
+            </Router>
           </MuiThemeProvider>
         </div>
       </div>
