@@ -9,15 +9,13 @@ import NotFound from './NotFound';
 import UserEdit from './users/Edit'
 import Layout from './layout/layout'
 const routes = () => (
-  <Router>
-    <div className="App">
-      <Route path="/" component={App} />
-      <Route path="/registration" component={Register} />
-      <Route path="/login" component={Login} />
-      <Route path="/welcome" component={WelcomeScreen} />
-      <Route path="/users/:id/edit" component={UserEdit} />
-      <Route path="*" component={NotFound} />
-    </div>
-  </Router>
+  <div>
+    <Route exact path="/" component={Dashboard} />
+    <Route path="/registration" component={Register} />
+    <Route path="/login" component={Login} />
+    <Route path="/welcome" component={WelcomeScreen} />
+    <Route path="/users/:id/edit" component={UserEdit} />
+    <Route path="*" component={NotFound} />
+  </div>
 )
 export default routes;

@@ -8,13 +8,14 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
-import { isLoggedIn, authToken } from '../helper.js';
+import { isLoggedIn, authToken, currentUser } from '../helper.js';
 
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: isLoggedIn()
+      isLoggedIn: isLoggedIn(),
+      user: currentUser(),
     }   
   }
 
@@ -49,7 +50,9 @@ class Header extends Component {
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
-        <MenuItem primaryText="Profile" />
+        <Link to={"/users/" + this.state.user.id + "/edit"} >
+          <MenuItem primaryText="Profile" />
+        </Link>
         <MenuItem primaryText="Sign out" onClick={(event) => this.handleLogout(event)} />
       </IconMenu>
     );

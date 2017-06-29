@@ -17,11 +17,18 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Layout />
-        { this.state.authToken &&
-          <Redirect to="/welcome" />
-        }
+      <div className="App">
+        <Router>
+          <div>
+            <Layout>
+              <Routes />
+              { this.state.authToken &&
+                <Redirect to="/welcome" />
+              }
+            </Layout>
+            {this.props.children}
+          </div>
+        </Router>
       </div>
     );
   }
