@@ -13,7 +13,6 @@ import axios from 'axios';
 import Loginscreen from './Loginscreen';
 import { authToken, currentUser } from './helper.js';
 import Login from './Login';
-var apiBaseUrl = "http://localhost:4000/";
 
 class WelcomeScreen extends Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class WelcomeScreen extends Component {
       }
     }
 
-    axios.get(apiBaseUrl + 'users/' + this.state.id, config)
+    axios.get(process.env.REACT_APP_API_BASE_URL + 'users/' + this.state.id, config)
     .then(function(response){
       if(response.status == 200) {
         self.setState({user: response.data})

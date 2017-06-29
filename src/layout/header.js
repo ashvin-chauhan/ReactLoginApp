@@ -10,24 +10,24 @@ import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
 import { isLoggedIn, authToken, currentUser } from '../helper.js';
 
+console.log(this.state)
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoggedIn: isLoggedIn(),
-      user: currentUser(),
-    }   
+      user: currentUser()
+    }
   }
 
   handleLogout(event) {
-    var apiBaseUrl = "http://localhost:4000/"
     var self = this;
     var payload = {
       token: authToken(),
       redirectToReferrer: false
     }
 
-    axios.post(apiBaseUrl + "oauth/revoke", payload)
+    axios.post(process.env.REACT_APP_API_BASE_URL + "oauth/revoke", payload)
     .then(function (response) {
       console.log(response);
       if (response.status == 200){
@@ -59,7 +59,7 @@ class Header extends Component {
 
     Logged.muiName = 'IconMenu';
     
-    if (this.state.isLoggedIn) {
+    if (isLoggedIn()) {
       return (
         <div>
           <MuiThemeProvider>

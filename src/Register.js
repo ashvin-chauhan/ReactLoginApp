@@ -19,7 +19,6 @@ class Register extends Component {
   }
 
   handleClick(event){
-    var apiBaseUrl = "http://localhost:4000/";
     console.log("values",this.state.first_name,this.state.last_name,this.state.email,this.state.password);
     var self = this;
     var payload={
@@ -28,7 +27,7 @@ class Register extends Component {
       "email":this.state.email,
       "password":this.state.password
     }
-    axios.post(apiBaseUrl + '/register', payload)
+    axios.post(process.env.REACT_APP_API_BASE_URL + '/register', payload)
    .then(function (response) {
      console.log(response);
      if(response.data.code == 200){

@@ -6,7 +6,6 @@ import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
 import { authToken } from '../helper.js';
-var apiBaseUrl = "http://localhost:4000/";
 
 class Edit extends Component {
   constructor(props) {
@@ -31,7 +30,7 @@ class Edit extends Component {
       }
     }
 
-    axios.get(apiBaseUrl + 'users/' + this.state.id, config)
+    axios.get(process.env.REACT_APP_API_BASE_URL + 'users/' + this.state.id, config)
     .then(function(response){
       if(response.status == 200) {
         self.setState({user: response.data})
@@ -62,7 +61,7 @@ class Edit extends Component {
       user: this.state.user
     }
 
-    axios.put(apiBaseUrl + 'users', payload, config)
+    axios.put(process.env.REACT_APP_API_BASE_URL + 'users', payload, config)
     .then(function(response){
       console.log(response);
       if(response.status == 200) {

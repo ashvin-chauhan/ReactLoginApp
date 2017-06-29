@@ -20,18 +20,17 @@ class Login extends Component {
   }
 
   handleClick(event){
-    var apiBaseUrl = "http://localhost:4000/";
     var self = this;
     var payload={
-      // "email": this.state.email,
-      "email": "client1@gmail.com",
-      // "password": this.state.password,
-      "password": "Hello@123",
+      "email": this.state.email,
+      // "email": "client1@gmail.com",
+      "password": this.state.password,
+      // "password": "Hello@123",
       "user_id": 2,
       "grant_type": "password"
     }
 
-    axios.post(apiBaseUrl + 'oauth/token', payload)
+    axios.post(process.env.REACT_APP_API_BASE_URL + 'oauth/token', payload)
     .then(function (response) {
       console.log(response);
       if(response.status == 200){
