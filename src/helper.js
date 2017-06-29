@@ -4,9 +4,9 @@ export function authToken() {
 
 export function isLoggedIn() {
   if (authToken()) {
-    return 'true';
+    return true;
   } else {
-    return 'false';
+    return false;
   }
 }
 

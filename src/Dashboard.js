@@ -14,7 +14,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props.location);
     if (this.state.authToken) {
       return (
         <Redirect to="/welcome" />
@@ -25,15 +24,6 @@ class Dashboard extends Component {
       <div>
         <MuiThemeProvider>
           <div>
-            <AppBar
-              title="Welcome"
-            />
-            <Link to="/login" >
-              <RaisedButton label="Login" primary={true} />
-            </Link>
-            <Link to="/registration" >
-              <RaisedButton label="SignUp" primary={true} />
-            </Link>
           </div>
         </MuiThemeProvider>
       </div>

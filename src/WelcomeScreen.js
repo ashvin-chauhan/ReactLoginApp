@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Menu from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -11,80 +11,53 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
 import Loginscreen from './Loginscreen';
-import { isLoggedIn, authToken, currentUser } from './helper.js';
+import { authToken, currentUser } from './helper.js';
 import Login from './Login';
+var apiBaseUrl = "http://localhost:4000/";
 
 class WelcomeScreen extends Component {
   constructor(props) {
-    console.log("hello" + currentUser());
     super(props);
     this.state = {
-      isLoggedIn: isLoggedIn(),
-      currentUser: currentUser(),
-      redirectToReferrer: false
+      id: currentUser().id,
+      authToken: authToken(),
+      user: {},
     }   
   }
 
-  handleLogout(event) {
-    var apiBaseUrl = "http://localhost:4000/"
+  componentDidMount() {
     var self = this;
-    var payload = {
-      token: authToken()
+    var config={
+      headers: {
+        'Authorization': "bearer " + this.state.authToken,
+        'Content-Type': 'application/json'
+      }
     }
 
-    axios.post(apiBaseUrl + "oauth/revoke", payload)
-    .then(function (response) {
-      console.log(response);
-      if (response.status == 200){
-        console.log('Logout successfull')
-        localStorage.clear();
-        self.setState({ redirectToReferrer: true })
+    axios.get(apiBaseUrl + 'users/' + this.state.id, config)
+    .then(function(response){
+      if(response.status == 200) {
+        self.setState({user: response.data})
       }
     })
   }
 
   render() {
-    const { redirectToReferrer } = this.state
-    if (redirectToReferrer) {
-      return (
-        <Redirect to="/login"/>
-      )
-    }
-
-    const Logged = (props) => (
-      <IconMenu
-        {...props}
-        iconButtonElement={
-          <IconButton><MoreVertIcon /></IconButton>
-        }
-        targetOrigin={{horizontal: 'right', vertical: 'top'}}
-        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-      >
-        <MenuItem primaryText="Profile" />
-        <MenuItem primaryText="Sign out" onClick={(event) => this.handleLogout(event)} />
-      </IconMenu>
-    );
-
-    Logged.muiName = 'IconMenu';
     return(
       <div>
         <MuiThemeProvider>
           <div>
-            <AppBar
-              title="Welcome"
-              iconElementRight={this.state.isLoggedIn ? <Logged /> : ''}
-            />
-            
             <div style={style.profileDiv}>
               <Menu desktop={true} width={256}>
-                <MenuItem primaryText="Email" secondaryText={this.state.currentUser.email} />
-                <MenuItem primaryText="First Name" secondaryText={this.state.currentUser.first_name} />
-                <MenuItem primaryText="Last Name" secondaryText={this.state.currentUser.last_name} />
-                <MenuItem primaryText="Phone" secondaryText={this.state.currentUser.phone} />
-                <MenuItem primaryText="Nickname" secondaryText={this.state.currentUser.nick_name} />
-                <MenuItem primaryText="Role" secondaryText={this.state.currentUser.roles[0].name} />
+                <MenuItem primaryText="Email" secondaryText={this.state.user.email} />
+                <MenuItem primaryText="First Name" secondaryText={this.state.user.first_name} />
+                <MenuItem primaryText="Last Name" secondaryText={this.state.user.last_name} />
+                <MenuItem primaryText="Phone" secondaryText={this.state.user.phone} />
+                <MenuItem primaryText="Nickname" secondaryText={this.state.user.nick_name} />
               </Menu>
-              <RaisedButton label="EDIT PROFILE" primary={true} />
+              <Link to={"users/" + this.state.user.id + "/edit"} >
+                <RaisedButton label="EDIT PROFILE" primary={true} />
+              </Link>
             </div>
           </div>
         </MuiThemeProvider>

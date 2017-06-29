@@ -62,9 +62,6 @@ class Login extends Component {
       <div>
         <MuiThemeProvider>
           <div>
-            <AppBar
-              title="Login"
-            />
             <TextField
               hintText="Enter your Email"
               floatingLabelText="Email"
@@ -84,6 +81,12 @@ class Login extends Component {
               </ListItem>
             </List>
             <RaisedButton label="Submit" primary={true} style={style.buttonStyle} onClick={(event) => this.handleClick(event)}/>
+            <div>
+              Not Registered yet? Go to registration 
+              <Link to="/registration">
+                <RaisedButton label="Register" primary={true} style={style.buttonStyle}/>
+              </Link>
+            </div>
         </div>
         </MuiThemeProvider>
       </div>
