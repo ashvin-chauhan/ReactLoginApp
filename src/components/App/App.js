@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './App.css';
-import Routes from './routes';
-import Layout from './layout/layout';
-import { authToken } from './helper.js';
+import Routes from '../Routes/routes';
+import Layout from '../../views/layout/layout';
+import { authToken } from '../helper.js';
 injectTapEventPlugin();
 
 class App extends Component {

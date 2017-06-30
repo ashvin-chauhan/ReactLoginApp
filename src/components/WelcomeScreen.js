@@ -10,7 +10,6 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
-import Loginscreen from './Loginscreen';
 import { authToken, currentUser } from './helper.js';
 import Login from './Login';
 

@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/MenuItem';
 import axios from 'axios';
-import { isLoggedIn, authToken, currentUser } from '../helper.js';
+import { isLoggedIn, authToken, currentUser } from '../../components/helper.js';
 
 console.log(this.state)
 class Header extends Component {

@@ -1,13 +1,12 @@
 import React, {Component} from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import App from './App';
-import WelcomeScreen from './WelcomeScreen'
-import Dashboard from './Dashboard';
-import NotFound from './NotFound';
-import UserEdit from './users/Edit'
-import Layout from './layout/layout'
+import Login from '../Login';
+import Register from '../Register';
+import App from '../App/App';
+import WelcomeScreen from '../WelcomeScreen'
+import Dashboard from '../Dashboard';
+import NotFound from '../NotFound';
+import UserEdit from '../users/Edit'
 const routes = () => (
   <div>
     <Route exact path="/" component={Dashboard} />

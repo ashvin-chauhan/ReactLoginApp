@@ -8,6 +8,7 @@ import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import axios from 'axios';
 import WelcomeScreen from './WelcomeScreen'
+
 class Login extends Component {
   constructor(props){
     super(props);
@@ -22,10 +23,10 @@ class Login extends Component {
   handleClick(event){
     var self = this;
     var payload={
-      "email": this.state.email,
-      // "email": "client1@gmail.com",
-      "password": this.state.password,
-      // "password": "Hello@123",
+      // "email": this.state.email,
+      "email": "client1@gmail.com",
+      // "password": this.state.password,
+      "password": "Hello@123",
       "user_id": 2,
       "grant_type": "password"
     }
@@ -45,6 +46,7 @@ class Login extends Component {
       }
     })
     .catch(function (error) {
+      console.log(error)
       self.setState({error: error.response.data.error})
       console.log(error.response.data.error);
     });
