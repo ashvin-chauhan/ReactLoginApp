@@ -1,6 +1,6 @@
-import Header from './header'
-import Footer from './footer'
 import React, {Component} from 'react'
+import Header from './Header'
+import Footer from './Footer'
 
 class Layout extends Component {
   render() {

@@ -61,7 +61,7 @@ class Edit extends Component {
     .then(function(response){
       console.log(response);
       if(response.status == 200) {
-        self.setState({user: response.data, redirectUrl: '/welcome'})
+        self.setState({user: response.data, redirectUrl: '/users/' + self.state.id })
       }
     }) 
   }

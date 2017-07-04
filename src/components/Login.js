@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import List from 'material-ui/List/List';
-import ListItem from 'material-ui/List/ListItem';
 import axios from 'axios';
-import WelcomeScreen from './WelcomeScreen'
+import loginTemplate from '../views/users/login'
 
 class Login extends Component {
   constructor(props){
@@ -53,50 +47,7 @@ class Login extends Component {
   }
 
   render() {
-    const { redirectToReferrer } = this.state
-    if (redirectToReferrer) {
-      return (
-        <Redirect to="/welcome"/>
-      )
-    }
-    return (
-      <div>
-        <MuiThemeProvider>
-          <div>
-            <TextField
-              hintText="Enter your Email"
-              floatingLabelText="Email"
-              onChange = {(event,newValue) => this.setState({email: newValue})}
-              />
-            <br/>
-            <TextField
-              type="password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
-              onChange = {(event,newValue) => this.setState({password: newValue})}
-              />
-            <br/>
-            <List style={style.buttonStyle}>
-              <ListItem style={{color: 'red'}}>
-                {this.state.error}
-              </ListItem>
-            </List>
-            <RaisedButton label="Submit" primary={true} style={style.buttonStyle} onClick={(event) => this.handleClick(event)}/>
-            <div>
-              Not Registered yet? Go to registration 
-              <Link to="/registration">
-                <RaisedButton label="Register" primary={true} style={style.buttonStyle}/>
-              </Link>
-            </div>
-        </div>
-        </MuiThemeProvider>
-      </div>
-    );
+    return loginTemplate(this);
   }
 }
-const style = {
-  buttonStyle: {
-    margin: 15,
-  }
-};
 export default Login;

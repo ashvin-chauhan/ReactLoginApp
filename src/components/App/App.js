@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './App.css';
 import Routes from '../Routes/routes';
-import Layout from '../../views/layout/layout';
+import Layout from '../layout/Layout';
 import { authToken } from '../helper.js';
 injectTapEventPlugin();
 
@@ -23,7 +23,7 @@ class App extends Component {
             <Layout>
               <Routes />
               { this.state.authToken &&
-                <Redirect to="/welcome" />
+                <Redirect to="/" />
               }
             </Layout>
             {this.props.children}

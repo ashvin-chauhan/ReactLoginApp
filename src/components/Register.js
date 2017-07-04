@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import Login from './Login';
+import registerTemplate from '../views/users/register';
 
 class Register extends Component {
   constructor(props){
@@ -48,50 +44,7 @@ class Register extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <MuiThemeProvider>
-          <div>
-            <TextField
-              hintText="Enter your First Name"
-              floatingLabelText="First Name"
-              onChange = {(event,newValue) => this.setState({first_name:newValue})}
-              />
-            <br/>
-            <TextField
-              hintText="Enter your Last Name"
-              floatingLabelText="Last Name"
-              onChange = {(event,newValue) => this.setState({last_name:newValue})}
-              />
-            <br/>
-            <TextField
-              hintText="Enter your Email"
-              type="email"
-              floatingLabelText="Email"
-              onChange = {(event,newValue) => this.setState({email:newValue})}
-              />
-            <br/>
-            <TextField
-              type = "password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
-              onChange = {(event,newValue) => this.setState({password:newValue})}
-              />
-            <br/>
-            <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-            <div>
-              Already registered?
-              <Link to="/login">
-                <RaisedButton label="Login" primary={true} style={style}/>
-              </Link>
-            </div>
-          </div>
-         </MuiThemeProvider>
-      </div>
-    );
+    return registerTemplate(this);
   }
 }
-const style = {
-  margin: 15,
-};
 export default Register;
