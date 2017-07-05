@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import { authToken, isLoggedIn, currentUser } from '../helper.js';
+import { isLoggedIn, currentUser } from '../helper.js';
+import { logout } from '../../services/authService'
 import headerTemplate from '../../views/layout/header';
 
 class Header extends Component {
@@ -21,20 +21,17 @@ class Header extends Component {
   }
 
   handleLogout(event) {
-    var self = this;
-    var payload = {
-      token: authToken()
-    }
+    logout()
+      .then(function (response) {
+        this.handleResponse(response)
+      })
+  }
 
-    axios.post(process.env.REACT_APP_API_BASE_URL + "oauth/revoke", payload)
-    .then(function (response) {
-      console.log(response);
-      if (response.status == 200){
-        console.log('Logout successfull')
-        localStorage.clear();
-        self.setState({ redirectToReferrer: true, isLoggedIn: false })
-      }
-    })
+  handleResponse(response) {
+    if (response.status == 200){
+      localStorage.clear();
+      this.setState({ redirectToReferrer: true, isLoggedIn: false })
+    }
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import { authToken } from '../helper.js';
+import { getUser, updateUser } from '../../services/userService'
 import editTemplate from '../../views/users/edit'
 
 class Edit extends Component {
@@ -8,7 +8,6 @@ class Edit extends Component {
     super(props);
     this.state = {
       id: this.props.match.params.id,
-      authToken: authToken(),
       user: '',
       redirectUrl: ''
     }
@@ -19,19 +18,13 @@ class Edit extends Component {
 
   componentDidMount() {
     var self = this;
-    var config={
-      headers: {
-        'Authorization': "bearer " + this.state.authToken,
-        'Content-Type': 'application/json'
-      }
-    }
 
-    axios.get(process.env.REACT_APP_API_BASE_URL + 'users/' + this.state.id, config)
-    .then(function(response){
-      if(response.status == 200) {
-        self.setState({user: response.data})
-      }
-    })
+    getUser(this.state.id)
+      .then(function(response){
+        if(response.status == 200) {
+          self.setState({user: response.data})
+        }
+      })
   }
 
   handleChange(e) {
@@ -45,25 +38,16 @@ class Edit extends Component {
 
   handleClick(e) {
     var self = this;
-    var config={
-      headers: {
-        'Authorization': "bearer " + this.state.authToken,
-        'Content-Type': 'application/json'
-      }
-    }
+    updateUser(self.state)
+      .then(function(response){
+        self.handleResponse(response);
+      }) 
+  }
 
-    var payload={
-      id: this.state.id,
-      user: this.state.user
+  handleResponse(response) {
+    if(response.status == 200) {
+      this.setState({user: response.data, redirectUrl: '/users/' + this.state.id })
     }
-
-    axios.put(process.env.REACT_APP_API_BASE_URL + 'users', payload, config)
-    .then(function(response){
-      console.log(response);
-      if(response.status == 200) {
-        self.setState({user: response.data, redirectUrl: '/users/' + self.state.id })
-      }
-    }) 
   }
 
   render () {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { login } from '../services/authService'
 import loginTemplate from '../views/users/login'
 
 class Login extends Component {
@@ -25,25 +25,25 @@ class Login extends Component {
       "grant_type": "password"
     }
 
-    axios.post(process.env.REACT_APP_API_BASE_URL + 'oauth/token', payload)
-    .then(function (response) {
-      console.log(response);
-      if(response.status == 200){
-        console.log("Login successfull");
-        localStorage.setItem( 'AUTH_TOKEN', response.data.token.access_token );
-        localStorage.setItem( 'CURRENT_USER', JSON.stringify(response.data.user) );
-        self.setState({ redirectToReferrer: true })
-      }
-      else{
-        console.log("Invalid email and password");
-        alert("Invalid email and password");
-      }
-    })
-    .catch(function (error) {
-      console.log(error)
-      self.setState({error: error.response.data.error})
-      console.log(error.response.data.error);
-    });
+    login(payload)
+      .then(function (response) {
+        self.handelResponse(response)
+      })
+      .catch(function (error) {
+        self.setState({error: error.response.data.error})
+      });
+  }
+
+  handelResponse(response) {
+    if(response.status == 200){
+      localStorage.setItem( 'AUTH_TOKEN', response.data.token.access_token );
+      localStorage.setItem( 'CURRENT_USER', JSON.stringify(response.data.user) );
+      this.setState({ redirectToReferrer: true })
+    }
+    else{
+      console.log("Invalid email and password");
+      alert("Invalid email and password");
+    }
   }
 
   render() {
