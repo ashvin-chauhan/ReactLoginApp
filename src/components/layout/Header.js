@@ -8,7 +8,8 @@ class Header extends Component {
     super(props);
     this.state = {
       isLoggedIn: isLoggedIn(),
-      user: currentUser()
+      user: currentUser(),
+      redirectToReferrer: false
     }
   }
 
@@ -22,8 +23,7 @@ class Header extends Component {
   handleLogout(event) {
     var self = this;
     var payload = {
-      token: authToken(),
-      redirectToReferrer: false
+      token: authToken()
     }
 
     axios.post(process.env.REACT_APP_API_BASE_URL + "oauth/revoke", payload)

@@ -13,19 +13,19 @@ export default (component) => {
   const { redirectToReferrer } = component.state
 
   const Logged = (props) => (
-      <IconMenu
-      {...props}
-      iconButtonElement={
-          <IconButton><MoreVertIcon /></IconButton>
-      }
-      targetOrigin={{horizontal: 'right', vertical: 'top'}}
-      anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-      >
-      <Link to={"/users/" + component.state.user.id} >
-          <MenuItem primaryText="Profile" />
-      </Link>
-      <MenuItem primaryText="Sign out" onClick={(event) => component.handleLogout(event)} />
-      </IconMenu>
+    <IconMenu
+    {...props}
+    iconButtonElement={
+        <IconButton><MoreVertIcon /></IconButton>
+    }
+    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+    >
+    <Link to={"/users/" + component.state.user.id} >
+        <MenuItem primaryText="Profile" />
+    </Link>
+    <MenuItem primaryText="Sign out" onClick={(event) => component.handleLogout(event)} />
+    </IconMenu>
   );
 
   Logged.muiName = 'IconMenu';
