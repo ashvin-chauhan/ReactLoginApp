@@ -1,10 +1,17 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 export default (component) => {
+  const { redirectToReferrer } = component.state
+  if (redirectToReferrer) {
+    return (
+      <Redirect push to="/"/>
+    )
+  }
+
   return (
     <div>
       <MuiThemeProvider>
