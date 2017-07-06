@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './App.css';
 import Routes from '../Routes/routes';
@@ -22,9 +22,6 @@ class App extends Component {
           <div>
             <Layout>
               <Routes />
-              { this.state.authToken &&
-                <Redirect to="/" />
-              }
             </Layout>
             {this.props.children}
           </div>

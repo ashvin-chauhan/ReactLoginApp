@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom';
 import { login } from '../services/authService'
+import { isLoggedIn } from './helper'
 import loginTemplate from '../views/users/login'
 
 class Login extends Component {
@@ -11,6 +12,12 @@ class Login extends Component {
       password:'',
       error: '',
       redirectToReferrer: false
+    }
+  }
+
+  componentWillMount() { // When access the route with first time
+    if(isLoggedIn()) {
+      this.setState({ redirectToReferrer: true })
     }
   }
 

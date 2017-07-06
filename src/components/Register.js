@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Login from './Login';
+import { isLoggedIn } from './helper'
 import registerTemplate from '../views/users/register';
 
 class Register extends Component {
@@ -10,7 +11,14 @@ class Register extends Component {
       first_name:'',
       last_name:'',
       email:'',
-      password:''
+      password:'',
+      redirectToReferrer: false
+    }
+  }
+
+  componentWillMount() { // When access the route with first time
+    if(isLoggedIn()) {
+      this.setState({ redirectToReferrer: true })
     }
   }
 

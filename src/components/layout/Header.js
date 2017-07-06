@@ -21,9 +21,10 @@ class Header extends Component {
   }
 
   handleLogout(event) {
+    var self = this;
     logout()
       .then(function (response) {
-        this.handleResponse(response)
+        self.handleResponse(response)
       })
   }
 
