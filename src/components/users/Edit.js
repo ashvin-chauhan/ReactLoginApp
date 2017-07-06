@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import { authToken } from '../helper.js';
-import { getUser, updateUser } from '../../services/userService'
-import editTemplate from '../../views/users/edit'
+import { Component } from 'react';
+import { getUser, updateUser } from '../../services/userService';
+import editTemplate from '../../views/users/edit';
 
 class Edit extends Component {
   constructor(props) {
@@ -10,7 +9,7 @@ class Edit extends Component {
       id: this.props.match.params.id,
       user: '',
       redirectUrl: ''
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -19,12 +18,11 @@ class Edit extends Component {
   componentDidMount() {
     var self = this;
 
-    getUser(this.state.id)
-      .then(function(response){
-        if(response.status == 200) {
-          self.setState({user: response.data})
-        }
-      })
+    getUser(this.state.id).then(function(response) {
+      if (response.status === 200) {
+        self.setState({ user: response.data });
+      }
+    });
   }
 
   handleChange(e) {
@@ -32,25 +30,27 @@ class Edit extends Component {
     var key = e.target.id;
     user[key] = e.target.value;
     this.setState({
-        user,
+      user
     });
   }
 
   handleClick(e) {
     var self = this;
-    updateUser(self.state)
-      .then(function(response){
-        self.handleResponse(response);
-      }) 
+    updateUser(self.state).then(function(response) {
+      self.handleResponse(response);
+    });
   }
 
   handleResponse(response) {
-    if(response.status == 200) {
-      this.setState({user: response.data, redirectUrl: '/users/' + this.state.id })
+    if (response.status === 200) {
+      this.setState({
+        user: response.data,
+        redirectUrl: '/users/' + this.state.id
+      });
     }
   }
 
-  render () {
+  render() {
     return editTemplate(this);
   }
 }

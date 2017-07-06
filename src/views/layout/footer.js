@@ -1,9 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-export default (component) => {
-  return (
-    <div>
-      Footer
-    </div>
-  )
-}
+export default component => {
+  return <div>Footer</div>;
+};

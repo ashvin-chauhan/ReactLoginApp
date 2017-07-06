@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import dashboardTemplate from '../views/dashboard';
 
 class Dashboard extends Component {

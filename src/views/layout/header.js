@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
@@ -9,24 +9,28 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/MenuItem';
 import { isLoggedIn } from '../../components/helper.js';
 
-export default (component) => {
-  const { redirectToReferrer } = component.state
+export default component => {
+  const { redirectToReferrer } = component.state;
 
-  const Logged = (props) => (
+  const Logged = props =>
     <IconMenu
-    {...props}
-    iconButtonElement={
-        <IconButton><MoreVertIcon /></IconButton>
-    }
-    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+      {...props}
+      iconButtonElement={
+        <IconButton>
+          <MoreVertIcon />
+        </IconButton>
+      }
+      targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+      anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
     >
-    <Link to={"/users/" + component.state.user.id} >
+      <Link to={'/users/' + component.state.user.id}>
         <MenuItem primaryText="Profile" />
-    </Link>
-    <MenuItem primaryText="Sign out" onClick={(event) => component.handleLogout(event)} />
-    </IconMenu>
-  );
+      </Link>
+      <MenuItem
+        primaryText="Sign out"
+        onClick={event => component.handleLogout(event)}
+      />
+    </IconMenu>;
 
   Logged.muiName = 'IconMenu';
 
@@ -40,32 +44,30 @@ export default (component) => {
           />
         </MuiThemeProvider>
       </div>
-    )
+    );
   } else {
-    return(
+    return (
       <div>
         <MuiThemeProvider>
           <div>
-          <AppBar
-            title={<Link to="/">Login App</Link>}
-            onTitleTouchTap={component.handleTouchTap}
-            iconElementRight={
-              <div>
-                <Link to="/login" >
-                  <FlatButton label="Login" />
-                </Link>
-                <Link to="/registration" >
-                  <FlatButton label="Sign Up" />
-                </Link>
-              </div>
-            }
-          />
-          { redirectToReferrer &&
-            <Redirect to="/login"/>
-          }
+            <AppBar
+              title={<Link to="/">Login App</Link>}
+              onTitleTouchTap={component.handleTouchTap}
+              iconElementRight={
+                <div>
+                  <Link to="/login">
+                    <FlatButton label="Login" />
+                  </Link>
+                  <Link to="/registration">
+                    <FlatButton label="Sign Up" />
+                  </Link>
+                </div>
+              }
+            />
+            {redirectToReferrer && <Redirect to="/login" />}
           </div>
         </MuiThemeProvider>
       </div>
-    )
+    );
   }
-}
+};

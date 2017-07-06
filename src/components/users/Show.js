@@ -1,28 +1,25 @@
-import React, {Component} from 'react';
-import AppBar from 'material-ui/AppBar';
-import { authToken, currentUser } from '../helper.js';
+import { Component } from 'react';
+import { currentUser } from '../helper.js';
 import { getUser } from '../../services/userService';
-import Login from '../Login';
-import showTemplate from '../../views/users/show'
+import showTemplate from '../../views/users/show';
 
 class Show extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: currentUser().id,
-      user: {},
-    }   
+      user: {}
+    };
   }
 
   componentDidMount() {
     var self = this;
 
-    getUser(this.state.id)
-      .then(function(response){
-        if(response.status == 200) {
-          self.setState({user: response.data})
-        }
-      })
+    getUser(this.state.id).then(function(response) {
+      if (response.status === 200) {
+        self.setState({ user: response.data });
+      }
+    });
   }
 
   render() {

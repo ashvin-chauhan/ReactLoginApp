@@ -1,5 +1,5 @@
 export function authToken() {
-  return localStorage.getItem('AUTH_TOKEN')
+  return localStorage.getItem('AUTH_TOKEN');
 }
 
 export function isLoggedIn() {
@@ -11,14 +11,14 @@ export function isLoggedIn() {
 }
 
 export function currentUser() {
-  return JSON.parse(localStorage.getItem('CURRENT_USER'))
+  return JSON.parse(localStorage.getItem('CURRENT_USER'));
 }
 
 export function apiHeader() {
   return {
     headers: {
-      'Authorization': "bearer " + authToken(),
+      Authorization: 'bearer ' + authToken(),
       'Content-Type': 'application/json'
     }
-  }
+  };
 }
