@@ -24,9 +24,9 @@ class Login extends Component {
   handleClick(event) {
     var self = this;
     var payload = {
-      // "email": this.state.email,
+      // email: this.state.email,
       email: 'client1@gmail.com',
-      // "password": this.state.password,
+      // password: this.state.password,
       password: 'Hello@123',
       user_id: 2,
       grant_type: 'password'

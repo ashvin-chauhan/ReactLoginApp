@@ -14,6 +14,10 @@ export function currentUser() {
   return JSON.parse(localStorage.getItem('CURRENT_USER'));
 }
 
+export function role() {
+  return currentUser().roles[0];
+}
+
 export function apiHeader() {
   return {
     headers: {

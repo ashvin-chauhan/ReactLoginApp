@@ -7,6 +7,7 @@ import Dashboard from '../Dashboard';
 import NotFound from '../NotFound';
 import UserEdit from '../users/Edit';
 import UserShow from '../users/Show';
+import Customers from '../Customers';
 import { isLoggedIn } from '../helper';
 
 const routes = () =>
@@ -17,6 +18,9 @@ const routes = () =>
     <Route path="/welcome" component={WelcomeScreen} />
     <PrivateRoute exact path="/users/:id/edit" component={UserEdit} />
     <PrivateRoute exact path="/users/:id" component={UserShow} />
+    <PrivateRoute exact path="/customers" component={Customers} />
+    <PrivateRoute exact path="/customers/:id" component={UserShow} />
+    <PrivateRoute exact path="/customers/:id/edit" component={UserEdit} />
     <Route component={NotFound} />
   </Switch>;
 

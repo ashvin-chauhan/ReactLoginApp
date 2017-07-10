@@ -33,7 +33,7 @@ export default component => {
                 secondaryText={component.state.user.nick_name}
               />
             </Menu>
-            <Link to={'/users/' + component.state.user.id + '/edit'}>
+            <Link to={component.editUrl()}>
               <RaisedButton label="EDIT PROFILE" primary={true} />
             </Link>
           </div>

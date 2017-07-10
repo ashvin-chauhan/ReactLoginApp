@@ -14,10 +14,10 @@ class Header extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    this.state = {
+    this.setState({
       isLoggedIn: isLoggedIn(),
       user: currentUser()
-    };
+    });
   }
 
   handleLogout(event) {
